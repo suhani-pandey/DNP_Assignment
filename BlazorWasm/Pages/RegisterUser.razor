@@ -1,0 +1,62 @@
+﻿@inject IUserService UserService;
+@page "/RegisterUser"
+@using Domain
+@using HttpClient.ClientInterface
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col-md-6">
+            <div class="mx-auto">
+                <h3 class="display-5 text-center">Register here!</h3>
+                <p class="text-muted mb-7 text-center">Create an account to register</p>
+            </div>
+            
+            <div class="row mb-3 w-75 mx-auto justify-content-center">
+                    <input type="text" @bind="userName" placeholder="Username" class=" border-bottom px-4 "/>
+            </div>
+            <div class="row mb-3 w-75 mx-auto justify-content-center">
+                    <input type="password" @bind="password" placeholder="Password" class=" border-bottom px-4 "/>
+            </div>
+            <div class="row mb-3 w-75 mx-auto justify-content-center">
+                    <input type="password" @bind="rePassword" placeholder="Confirm Password" class=" border-bottom px-4 "/>
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" @onclick="CreateUser" class="row btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-25">Register</button>
+            </div>
+            <div class="row justify-content-center">
+                <p class="text-center">Already a member?</p>
+                <u class="text-center">Login here!</u>
+            </div>
+            
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="images/signup-image.jpg" alt=""/>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string userName;
+    private string password;
+    private string rePassword;
+    private string resultMsg;
+    private string color;
+
+    private async Task CreateUser() {
+        resultMsg = "";
+
+        try
+        {
+            await UserService.CreateUser(new User(userName,password,rePassword));
+            userName = "";
+            resultMsg = "User successfully created";
+            color = "green";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+            color = "red";
+        }
+    }
+}
