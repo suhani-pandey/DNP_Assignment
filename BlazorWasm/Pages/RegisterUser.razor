@@ -18,8 +18,12 @@
                     <input type="password" @bind="password" placeholder="Password" class=" border-bottom px-4 "/>
             </div>
             <div class="row mb-3 w-75 mx-auto justify-content-center">
-                    <input type="password" @bind="rePassword" placeholder="Confirm Password" class=" border-bottom px-4 "/>
+                <input type="password" @bind="rePassword" placeholder="Confirm Password" class=" border-bottom px-4 "/>
             </div>
+            @if (!string.IsNullOrEmpty(resultMsg))
+                    {
+                        <label style="color: @color">@resultMsg</label>
+                    }
             <div class="row justify-content-center">
                 <button type="submit" @onclick="CreateUser" class="row btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-25">Register</button>
             </div>
@@ -49,6 +53,8 @@
         {
             await UserService.CreateUser(new User(userName,password,rePassword));
             userName = "";
+            password = "";
+            rePassword = "";
             resultMsg = "User successfully created";
             color = "green";
         }
