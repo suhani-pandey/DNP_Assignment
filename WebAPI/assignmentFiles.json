@@ -1,0 +1,51 @@
+{
+  "Users": [
+    {
+      "id": 1,
+      "username": "Suhani",
+      "password": "Suhani",
+      "rePassword": "Suhani"
+    },
+    {
+      "id": 2,
+      "username": "Suhani1",
+      "password": "Suhani",
+      "rePassword": "Suhani"
+    }
+  ],
+  "Forums": [
+    {
+      "Id": 1,
+      "Title": "Progamming",
+      "Description": "This is for lazy people"
+    }
+  ],
+  "Posts": [
+    {
+      "OwnerId": 0,
+      "ForumId": 0,
+      "postId": 1,
+      "PostTitle": "This is new post",
+      "Body": null,
+      "CreatedBy": null,
+      "BelongsToForum": {
+        "Id": 1,
+        "Title": "Progamming",
+        "Description": "This is for lazy people"
+      }
+    },
+    {
+      "OwnerId": 0,
+      "ForumId": 0,
+      "postId": 2,
+      "PostTitle": "Suhani",
+      "Body": null,
+      "CreatedBy": null,
+      "BelongsToForum": {
+        "Id": 1,
+        "Title": "Progamming",
+        "Description": "This is for lazy people"
+      }
+    }
+  ]
+}
