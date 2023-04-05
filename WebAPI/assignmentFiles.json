@@ -22,25 +22,29 @@
   ],
   "Posts": [
     {
-      "OwnerId": 0,
-      "ForumId": 0,
       "postId": 1,
       "PostTitle": "This is new post",
       "Body": null,
       "CreatedBy": null,
-      "BelongsToForum": {
-        "Id": 1,
-        "Title": "Progamming",
-        "Description": "This is for lazy people"
-      }
+      "BelongsToForum": null
     },
     {
-      "OwnerId": 0,
-      "ForumId": 0,
       "postId": 2,
       "PostTitle": "Suhani",
       "Body": null,
       "CreatedBy": null,
+      "BelongsToForum": null
+    },
+    {
+      "postId": 3,
+      "PostTitle": "This is new post",
+      "Body": "Hello, this is new post for new forum",
+      "CreatedBy": {
+        "id": 1,
+        "username": "Suhani",
+        "password": "Suhani",
+        "rePassword": "Suhani"
+      },
       "BelongsToForum": {
         "Id": 1,
         "Title": "Progamming",

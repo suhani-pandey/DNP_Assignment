@@ -1,8 +1,9 @@
 ﻿using Domain;
+using Domain.Dtos;
 
 namespace Application.LogicInterfaces;
 
 public interface IPostLogic
 {
-    Task<Post> CreatePostAsync(Post post);
+    Task<Post> CreatePostAsync(PostCreationDto post);
 }

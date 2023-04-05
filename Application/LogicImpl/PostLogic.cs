@@ -1,6 +1,7 @@
 ﻿using Application.DAOInterfaces;
 using Application.LogicInterfaces;
 using Domain;
+using Domain.Dtos;
 
 namespace Application.LogicImpl;
 
@@ -18,7 +19,7 @@ public class PostLogic:IPostLogic
         this.forumDao = forumDao;
     }
 
-    public async Task<Post> CreatePostAsync(Post postDto)
+    public async Task<Post> CreatePostAsync(PostCreationDto postDto)
     {
         User? user = await userDao.GetUserById(postDto.OwnerId);
         if (user==new User())
@@ -33,14 +34,14 @@ public class PostLogic:IPostLogic
         }
         
         ValidateData(postDto);
-        Post created = new Post(forum,user, postDto.PostTitle,postDto.Body);
+        Post created = new Post(forum,user, postDto.Title,postDto.Body);
         Post existing= await postDao.CreatePostAsync(created);
         return existing;
     }
 
-    private void ValidateData(Post post)
+    private void ValidateData(PostCreationDto post)
     {
-        if (string.IsNullOrEmpty(post.PostTitle)) throw new Exception("Title field should not be empty");
+        if (string.IsNullOrEmpty(post.Title)) throw new Exception("Title field should not be empty");
         if (string.IsNullOrEmpty(post.Body)) throw new Exception("Description shouldnt be empty");
        
     }

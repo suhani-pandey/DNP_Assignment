@@ -1,5 +1,6 @@
 ﻿using Application.LogicInterfaces;
 using Domain;
+using Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -16,7 +17,7 @@ public class PostController: ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult<Post>> CreateAsync([FromBody] Post dto)
+    public async Task<ActionResult<Post>> CreateAsync([FromBody] PostCreationDto dto)
     {
         try
         {
