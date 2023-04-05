@@ -16,16 +16,36 @@ public class FileContext
             return dataContainer!.Users;
         }
     }
+
+    public ICollection<Forum> Forums
+    {
+        get
+        {
+            LoadData();
+            return dataContainer!.Forums;
+        }
+    }
     
+    public ICollection<Post> Posts
+    {
+        get
+        {
+            LoadData();
+            return dataContainer!.Posts;
+        }
+    }
+
     private void LoadData()
     {
         if (dataContainer != null) return;
     
         if (!File.Exists(filePath))
         {
-            dataContainer = new ()
+            dataContainer = new()
             {
-                Users = new List<User>()
+                Users = new List<User>(),
+                Forums = new List<Forum>(),
+                Posts = new List<Post>()
             };
             return;
         }

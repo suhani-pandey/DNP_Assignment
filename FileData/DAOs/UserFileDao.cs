@@ -37,4 +37,10 @@ public class UserFileDao:IUserDAO
         );
         return Task.FromResult(existing);
     }
+
+    public Task<User?> GetUserById(int OwnerId)
+    {
+        User? existing = fileContext.Users.FirstOrDefault(u => u.id == OwnerId);
+        return Task.FromResult(existing);
+    }
 }
