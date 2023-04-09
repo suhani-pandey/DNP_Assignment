@@ -1,0 +1,28 @@
+﻿@page "/LoginLinks"
+@using HttpClient.ClientInterface
+@inject NavigationManager navMgr
+@inject IUserService UserService;
+
+<AuthorizeView>
+    <Authorized>
+        
+        <img class="icon" src="images/Logout.png" @onclick="Logout"/>
+    </Authorized>
+    <NotAuthorized>
+        @* <img class="icon" src="images/Login.png" @onclick="Login"/> *@
+        <a href="https://localhost:7182/Login">Login here to have the access</a>
+    </NotAuthorized>
+</AuthorizeView>
+    
+@code {
+    private void Login()
+    {
+        navMgr.NavigateTo("/Login");
+    }
+
+    private async Task Logout()
+    {
+        await UserService.LogoutAsync();
+        navMgr.NavigateTo("/");
+    }
+}

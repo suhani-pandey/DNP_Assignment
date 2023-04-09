@@ -17,4 +17,9 @@ public class User
         this.password = password;
         this.rePassword = rePassword;
     }
+
+    public User(string username)
+    {
+        this.username = username;
+    }
 }

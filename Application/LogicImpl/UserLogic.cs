@@ -1,6 +1,8 @@
-﻿using Application.DAOInterfaces;
+﻿using System.Collections;
+using Application.DAOInterfaces;
 using Application.LogicInterfaces;
 using Domain;
+using Domain.Dtos;
 
 namespace Application.LogicImpl;
 
@@ -32,6 +34,7 @@ public class UserLogic:IUserLogic
         return created;
     }
     
+
     private static void ValidateData(User userToCreate)
     {
         string userName = userToCreate.username;
@@ -44,12 +47,41 @@ public class UserLogic:IUserLogic
         if (userName.Length > 15)
             throw new Exception("Username must be less than 16 characters!");
 
-        if (password.Length>8 || password.Length<4)
-            throw new Exception("Password must be of 8 characters");
-        
+        if ( password.Length<4)
+            throw new Exception("Password must atleast of 8 characters");
+
         if(!(rePassword.Equals(password)))
         {
             throw new Exception("Password doesnt match");
         }
+    }
+    
+    public async Task<User> ValidateUser(UserLoginDtos userDto)
+    {
+        IEnumerable<User?> allUsers = await UserDao.GetAllUsersAsync();
+        User? existingUser = allUsers.FirstOrDefault(user =>
+            user.username.Equals(userDto.Username, StringComparison.OrdinalIgnoreCase));
+        if (existingUser == null)
+        {
+            throw new Exception("User not found");
+        }
+
+        if (!existingUser.password.Equals(userDto.Password))
+        {
+            throw new Exception("Password mismatch");
+        }
+
+        return existingUser;
+    }
+
+    public async Task<User> GetByIdAsync(int userId)
+    {
+        User? userById=  await UserDao.GetUserById(userId);
+        if (userById == null)
+        {
+            throw new Exception($"User with {userId} was not found");
+        }
+
+        return userById;
     }
 }

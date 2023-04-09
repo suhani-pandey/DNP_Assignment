@@ -23,6 +23,7 @@ public class ForumFileDao: IForumDao
             id++;
         }
         forumdto.Id = id;
+        forumdto.CreatedOn = DateTime.Now.ToString("dddd , MMM dd yyyy,hh:mm");
         context.Forums.Add(forumdto);
         context.SaveChanges();
 
@@ -33,5 +34,17 @@ public class ForumFileDao: IForumDao
     {
         Forum? existing = context.Forums.FirstOrDefault(u => u.Id == ForumId);
         return Task.FromResult(existing);
+    }
+
+    public Task<IEnumerable<Forum>> GetAllForumAsync(Forum forum)
+    {
+        IEnumerable<Forum> forums = context.Forums.AsEnumerable();
+        if (forum.Title!=null)
+        {
+            forums = context.Forums.Where(u =>
+                u.Title.Contains(forum.Title, StringComparison.OrdinalIgnoreCase) & u.Description.Contains(forum.Description));
+        }
+
+        return Task.FromResult(forums);
     }
 }

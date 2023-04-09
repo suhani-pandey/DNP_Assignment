@@ -1,0 +1,94 @@
+﻿@page "/Login"
+@* @using BlazorWasm.Services *@
+@using HttpClient.ClientInterface
+@inject IUserService UserService;
+@inject NavigationManager navMgr
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col-md-6 d-flex justify-content-center">
+                    <img src="images/signin-image.jpg" alt=""/>
+                </div>
+        <div class="col-md-6">
+            <div class="mx-auto">
+                <h2 class="display-5 text-center">Login</h2>
+
+            </div>
+
+            <div class="row mb-3 w-75 mx-auto justify-content-center ">
+                <input type="text" @bind="userName" placeholder="Username" class=" border-bottom px-4 border-dark rounded-0 "/>
+            </div>
+            <div class="row mb-3 w-75 mx-auto justify-content-center">
+                <input type="password" @bind="password" placeholder="Password" class=" border-bottom border-dark rounded-0 px-4 "/>
+            </div>
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <label style="color: @color">@msg</label>
+            }
+            <div class="row justify-content-center">
+                <button type="submit" @onclick="LoginAsync" class="row btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-25">Login</button>
+            </div>
+
+            <div class="row justify-content-center">
+                <a href="https://localhost:7182/RegisterUser"><u >I am not member.</u></a>
+                            
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+@* <AuthorizeView> *@
+@*     <NotAuthorized> *@
+@*         <div class="card"> *@
+@*             <h3>Please login</h3> *@
+@*             <div class="field"> *@
+@*                 <label>User name:</label> *@
+@*                 <input type="text" @bind="userName"/> *@
+@*             </div> *@
+@*             <div class="field"> *@
+@*                 <label style="text-align: center">Password:</label> *@
+@*                 <input type="password" @bind="password"/> *@
+@*             </div> *@
+@*             @if (!string.IsNullOrEmpty(errorLabel)) *@
+@*             { *@
+@*                 <div class="field"> *@
+@*                     <label style="color: red"> *@
+@*                         @errorLabel *@
+@*                     </label> *@
+@*                 </div> *@
+@*             } *@
+@*             <div class="field"> *@
+@*                 <button class="loginbtn" @onclick="LoginAsync">Log in</button> *@
+@*             </div> *@
+@*         </div> *@
+@*     </NotAuthorized> *@
+@*    *@
+@* </AuthorizeView> *@
+
+@code {
+    private string userName;
+    private string password;
+    private string errorLabel;
+    private string msg = "";
+    private string color;
+
+    private async Task LoginAsync()
+    {
+        errorLabel = "";
+        try
+        {
+            await UserService.LoginAsync(userName, password);
+            navMgr.NavigateTo("/");
+            msg = "Login successfully done";
+            color = "green";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+            color = "red";
+        }
+    }
+    
+}

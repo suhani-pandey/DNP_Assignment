@@ -26,14 +26,7 @@ public class FileContext
         }
     }
     
-    public ICollection<Post> Posts
-    {
-        get
-        {
-            LoadData();
-            return dataContainer!.Posts;
-        }
-    }
+   
 
     private void LoadData()
     {
@@ -45,7 +38,6 @@ public class FileContext
             {
                 Users = new List<User>(),
                 Forums = new List<Forum>(),
-                Posts = new List<Post>()
             };
             return;
         }
@@ -56,11 +48,12 @@ public class FileContext
     // take the content of the datacontainer and put it into the file
     public void SaveChanges()
     {
-        string serialized = JsonSerializer.Serialize(dataContainer, new JsonSerializerOptions
+        string serialized = JsonSerializer.Serialize(dataContainer, new JsonSerializerOptions()
         {
             WriteIndented = true
         });
         File.WriteAllText(filePath, serialized);
+
         dataContainer = null;
     }
 }

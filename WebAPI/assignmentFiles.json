@@ -8,48 +8,41 @@
     },
     {
       "id": 2,
-      "username": "Suhani1",
-      "password": "Suhani",
-      "rePassword": "Suhani"
+      "username": "Bihani",
+      "password": "Bihani",
+      "rePassword": "Bihani"
+    },
+    {
+      "id": 3,
+      "username": "NewUser",
+      "password": "NewUser",
+      "rePassword": "NewUser"
     }
   ],
   "Forums": [
     {
-      "Id": 1,
-      "Title": "Progamming",
-      "Description": "This is for lazy people"
-    }
-  ],
-  "Posts": [
-    {
-      "postId": 1,
-      "PostTitle": "This is new post",
-      "Body": null,
-      "CreatedBy": null,
-      "BelongsToForum": null
+      "Id": 4,
+      "Title": "Java",
+      "Description": "Any Java development queries should be posted in here and we\u0027ll do our best to help!",
+      "CreatedOn": "Sunday , Apr 09 2023,06.51"
     },
     {
-      "postId": 2,
-      "PostTitle": "Suhani",
-      "Body": null,
-      "CreatedBy": null,
-      "BelongsToForum": null
+      "Id": 5,
+      "Title": "Python",
+      "Description": "Python programming topics and help should be posted in here.",
+      "CreatedOn": "Sunday , Apr 09 2023,06.52"
     },
     {
-      "postId": 3,
-      "PostTitle": "This is new post",
-      "Body": "Hello, this is new post for new forum",
-      "CreatedBy": {
-        "id": 1,
-        "username": "Suhani",
-        "password": "Suhani",
-        "rePassword": "Suhani"
-      },
-      "BelongsToForum": {
-        "Id": 1,
-        "Title": "Progamming",
-        "Description": "This is for lazy people"
-      }
+      "Id": 6,
+      "Title": ".Net",
+      "Description": "A section covering all .NET development questions. ASP.NET, VB.NET, etc...",
+      "CreatedOn": "Sunday , Apr 09 2023,06.52"
+    },
+    {
+      "Id": 7,
+      "Title": "JavaScript",
+      "Description": "Get support on JavaScript, AJAX and other related technology.",
+      "CreatedOn": "Sunday , Apr 09 2023,06.52"
     }
   ]
 }

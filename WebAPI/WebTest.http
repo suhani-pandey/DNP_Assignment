@@ -1,0 +1,14 @@
+POST https://localhost:7150/user/login
+Content-Type: application/json
+
+{ "Username" : "Suhani", "Password" : "Suhani" }
+
+###
+
+POST https://localhost:7091/forum/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiIzYTk0MTBlZS0xMGRlLTRiMmMtOWZjYi1iNjg2YTI3MDUyZmEiLCJpYXQiOiI0LzYvMjAyMyAxOjA0OjUzIFBNIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InJhamlwMTIiLCJleHAiOjE2ODA3ODk4OTMsImlzcyI6IkpXVEF1dGhlbnRpY2F0aW9uU2VydmVyIiwiYXVkIjoiSldUU2VydmljZVNlcnZlckFwcCJ9.E2LXBcilyzVz3_dEAU5f71kcpeO9_zLaMt34krB-zlQRB2amJxzM-yFpmKWPyYLWqDNiUp4o253Y4YoU5vb9dA
+Content-Type: application/json
+
+{
+  "createdBy": "rajip12", "forumTitle": "some forum title 2"
+}

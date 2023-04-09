@@ -1,6 +1,7 @@
 ﻿using Application.DAOInterfaces;
 using Application.LogicInterfaces;
 using Domain;
+using Domain.Dtos;
 
 namespace Application.LogicImpl;
 
@@ -21,6 +22,25 @@ public class ForumLogic : IForumLogic
         Forum created = await forumDao.CreateForumAsync(forum);
         return created;
     }
+
+    public async Task<IEnumerable<Forum>> GetAllForumAsync(Forum forum)
+    {
+        IEnumerable<Forum> GetAllForum = await forumDao.GetAllForumAsync(forum);
+        return GetAllForum;
+    }
+    
+    public async Task<Forum> GetByIdAsync(int forumId)
+    {
+         Forum? forum=  await forumDao.GetForumById(forumId);
+             if (forum == null)
+             {
+                 throw new Exception($"Forum with {forumId} was not found");
+             }
+        
+             return forum;
+    }
+
+    
 
     private void ValidateData(Forum forumdto)
     {

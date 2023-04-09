@@ -1,0 +1,75 @@
+﻿@page "/"
+@inject IForumService ForumService
+@using HttpClient.ClientInterface
+@using Domain
+@inject NavigationManager navMgr
+
+
+
+@if (!string.IsNullOrEmpty(msg))@* display any msg in case it has ny value in case of error*@
+{
+    <div>
+        <span>@msg</span>
+    </div>
+}
+
+@if (forums == null)
+{
+    <span>Loading..</span>
+}
+else if (!forums.Any())
+{
+    <span>No forums to be found</span>
+}
+else
+{
+
+    <div class="container">
+        <div class="users-container">
+            @foreach (Forum forum in forums)
+            {
+                <div class="col user-card w-100 h-50 ">
+                    <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forum.Title</label>
+                    @* <label class="row mx-4 my-3 ">@forum.Description</label> *@
+                    <button class="mx-3 border-0 h-auto" @onclick="OpenDetail" >See more..</button>
+                    <label class="row mx-4 my-3 ">@forum.CreatedOn</label>
+                </div>
+            }
+        </div>
+    </div>
+    
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private IEnumerable<Forum>? forums;
+    private Forum forum;
+    private string msg = "";
+    private string title = "";
+    private string body = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        msg = "";
+        try
+        {
+            forums = await ForumService.GetForums();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private void OpenDetail()
+    {
+        ForumService.GetForumById(Id);
+        navMgr.NavigateTo($"/ViewAll/{Id}");
+    }
+    
+
+}
+
+}

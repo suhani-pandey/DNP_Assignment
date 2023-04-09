@@ -1,0 +1,61 @@
+﻿@inject IForumService ForumService;
+@page "/CreateForum"
+@using Domain
+@using HttpClient.ClientInterface
+@inject NavigationManager navMgr
+
+
+<AuthorizeView>
+    <Authorized>
+        <div class="card">
+            <h3>Create Forum</h3>
+            <div class="form-group field">
+                <label>Title:</label>
+                
+                <input type="text" @bind="ForumTitle" @bind:event="oninput"/>
+                <label>Description:</label>
+                                
+                <input type="text" @bind="Description" @bind:event="oninput"/>
+
+
+                @if (!string.IsNullOrEmpty(msg))
+                {
+                    <label style="color: @color">@msg</label>
+                }
+            </div>
+            <div class="button-row">
+                <button @onclick="Create" disabled="@(string.IsNullOrEmpty(ForumTitle))" class="acceptbtn">Create</button>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <LoginLinks/>
+    </NotAuthorized> 
+</AuthorizeView>
+
+
+@code {
+
+    private IEnumerable<Forum> forums;
+    private string msg = "";
+    private string ForumTitle = "";
+    private string Description = "";
+    private string color = "";
+
+    private async Task Create()
+    {
+        msg = "";
+        try
+        {
+            await ForumService.CreateForum(new Forum(ForumTitle,Description));
+            ForumTitle = "";
+            Description = "";
+            msg = "Forum successfully created";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+}

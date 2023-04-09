@@ -2,15 +2,15 @@
 @page "/RegisterUser"
 @using Domain
 @using HttpClient.ClientInterface
+@inject NavigationManager navMgr
 
 <div class="container-fluid">
     <div class="row no-gutter">
         <div class="col-md-6">
             <div class="mx-auto">
                 <h2 class="display-5 text-center">Sign Up</h2>
-                
             </div>
-            
+
             <div class="row mb-3 w-75 mx-auto justify-content-center ">
                 <input type="text" @bind="userName" placeholder="Username" class=" border-bottom px-4 border-dark rounded-0 "/>
             </div>
@@ -28,7 +28,8 @@
                 <button type="submit" @onclick="CreateUser" class="row btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-25">Register</button>
             </div>
             <div class="row justify-content-center">
-                <u class="text-center">I am already member.</u>
+                <a href="https://localhost:7182/login"><u >I am already member.</u></a>
+                
             </div>
             
         </div>
@@ -56,6 +57,7 @@
             rePassword = "";
             resultMsg = "User successfully created";
             color = "green";
+            navMgr.NavigateTo("/Login");
         }
         catch (Exception e)
         {
@@ -64,4 +66,10 @@
             color = "red";
         }
     }
+
+    private void Login()
+    {
+        navMgr.NavigateTo("/Login");
+    }
+
 }
