@@ -21,33 +21,43 @@ else if (!forums.Any())
 {
     <span>No forums to be found</span>
 }
-else
+else 
 {
+    <table class="table justify-content-center">
+        
+        <thead>
+        <tr>
+            <th class="text-center">No.</th>
+            <th class="text-center">Title</th>
+            <th class="text-center">Created On</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Forum forum in forums)
+        {
+            <tr>
+                <td class="text-center">@forum.Id</td>
+                <td class="text-center" @onclick="() => OpenDetail(forum.Id)">@forum.Title</td>
+                <td class="text-center">@forum.CreatedOn</td>
+            </tr>
+        }
 
-    <div class="container">
-        <div class="users-container">
-            @foreach (Forum forum in forums)
-            {
-                <div class="col user-card w-100 h-50 ">
-                    <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forum.Title</label>
-                    @* <label class="row mx-4 my-3 ">@forum.Description</label> *@
-                    <button class="mx-3 border-0 h-auto" @onclick="OpenDetail" >See more..</button>
-                    <label class="row mx-4 my-3 ">@forum.CreatedOn</label>
-                </div>
-            }
-        </div>
-    </div>
-    
+        </tbody>
+    </table>
+}
 
 
 @code {
+
     [Parameter]
     public int Id { get; set; }
+
     private IEnumerable<Forum>? forums;
     private Forum forum;
     private string msg = "";
     private string title = "";
     private string body = "";
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -63,13 +73,11 @@ else
         }
     }
 
-    private void OpenDetail()
+    private async void OpenDetail(int id)
     {
-        ForumService.GetForumById(Id);
-        navMgr.NavigateTo($"/ViewAll/{Id}");
+        await ForumService.GetForumById(id);
+        navMgr.NavigateTo($"/ViewAll/{id}");
     }
-    
 
-}
 
 }

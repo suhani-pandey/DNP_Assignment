@@ -5,3 +5,17 @@
     padding: 5px;
     border-radius: 10px;
 }
+
+.table {
+    margin-top: 50px;
+    margin-left: 290px;
+    width: 50% !important;
+    border-radius: 10px;
+    /*display: inline-block;*/
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 5px;
+}
+
+.table td  {
+    text-align: center;
+}

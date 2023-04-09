@@ -21,28 +21,58 @@
   ],
   "Forums": [
     {
-      "Id": 4,
+      "Id": 1,
       "Title": "Java",
       "Description": "Any Java development queries should be posted in here and we\u0027ll do our best to help!",
       "CreatedOn": "Sunday , Apr 09 2023,06.51"
     },
     {
-      "Id": 5,
+      "Id": 2,
       "Title": "Python",
       "Description": "Python programming topics and help should be posted in here.",
       "CreatedOn": "Sunday , Apr 09 2023,06.52"
     },
     {
-      "Id": 6,
+      "Id": 3,
       "Title": ".Net",
       "Description": "A section covering all .NET development questions. ASP.NET, VB.NET, etc...",
       "CreatedOn": "Sunday , Apr 09 2023,06.52"
     },
     {
-      "Id": 7,
+      "Id": 4,
       "Title": "JavaScript",
       "Description": "Get support on JavaScript, AJAX and other related technology.",
       "CreatedOn": "Sunday , Apr 09 2023,06.52"
+    },
+    {
+      "Id": 5,
+      "Title": "HTML and CSS",
+      "Description": "For general web development questions using HTML and CSS.",
+      "CreatedOn": "Sunday , Apr 09 2023,10.47"
+    },
+    {
+      "Id": 6,
+      "Title": "Mobile development",
+      "Description": "Discussion for mobile device development (Android, iPhone, iPad, Tablet, etc...)",
+      "CreatedOn": "Sunday , Apr 09 2023,10.47"
+    },
+    {
+      "Id": 7,
+      "Title": "UI and UX",
+      "Description": "Issues relating to User Interface and User Experience",
+      "CreatedOn": "Sunday , Apr 09 2023,10.47"
+    },
+    {
+      "Id": 8,
+      "Title": "Databases",
+      "Description": "MySQL, MS SQL, PostgreSQL and all other databases are covered.",
+      "CreatedOn": "Sunday , Apr 09 2023,10.48"
+    },
+    {
+      "Id": 9,
+      "Title": "Graphic design",
+      "Description": "Seek advice and help on graphics and animation in this section.",
+      "CreatedOn": "Sunday , Apr 09 2023,10.48"
     }
   ]
 }

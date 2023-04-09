@@ -25,15 +25,11 @@ else
 {
     <div class="container">
         <div class="users-container">
-            @* @foreach (Forum forum in forums) *@
-            @* { *@
-                <div class="col user-card w-100 h-50 ">
-                    <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forums.Title</label>
-                    <label class="row mx-4 my-3 ">@forums.Description</label>
-                    @* <button class="mx-3 border-0 h-auto"  >See more..</button> *@
-                    <label class="row mx-4 my-3 ">@forums.CreatedOn</label>
-                </div>
-            @* } *@
+            <div class="col user-card w-100 h-50 ">
+                <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forums.Title</label>
+                <label class="row mx-4 my-3 ">@forums.Description</label>
+                <label class="row mx-4 my-3 ">@forums.CreatedOn</label>
+            </div>
         </div>
     </div>
     
