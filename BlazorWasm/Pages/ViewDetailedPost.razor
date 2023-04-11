@@ -2,6 +2,8 @@
 @inject IForumService ForumService
 @using HttpClient.ClientInterface
 @using Domain
+
+
 @inject NavigationManager navMgr
 
 
@@ -17,30 +19,21 @@
 {
     <span>Loading..</span>
 }
-@* else if (!forums.Any()) *@
-@* { *@
-@*     <span>No forums to be found</span> *@
-@* } *@
 else
 {
     <div class="container-fluid">
         <div class="card">
             <div class="card-header h2">@forums.Title</div>
             <div class="card-body">
-                        @forums.Description
-                    </div>
+                @forums.Description
+            </div>
+            @* <label @bind="labelForLike">likes</label> *@
+            @* <div class="buttonLike"> *@
+            @*     <button class="Like" @onclick="LikeInPost">Like</button> *@
+            @* </div> *@
         </div>
         
     </div>
-    @* <div class="container"> *@
-    @*     <div class="users-container"> *@
-    @*         <div class="col user-card w-100 h-50 "> *@
-    @*             <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forums.Title</label> *@
-    @*             <label class="row mx-4 my-3 ">@forums.Description</label> *@
-    @*             <label class="row mx-4 my-3 ">@forums.CreatedOn</label> *@
-    @*         </div> *@
-    @*     </div> *@
-    @* </div> *@
     
 
 @code {
@@ -51,6 +44,7 @@ else
     private string msg = "";
     private string title = "";
     private string body = "";
+    private int labelForLike;
 
     // private int id;
     protected override async Task OnInitializedAsync()
@@ -67,6 +61,10 @@ else
         }
     }
     
+    // private void LikeInPost()
+    // {
+    //     labelForLike++;
+    // }
     
 
 }

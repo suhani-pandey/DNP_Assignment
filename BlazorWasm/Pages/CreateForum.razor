@@ -1,36 +1,46 @@
 ﻿@inject IForumService ForumService;
+@* @page "/CreateForum" *@
 @page "/CreateForum"
 @using Domain
 @using HttpClient.ClientInterface
 @inject NavigationManager navMgr
 
-
 <AuthorizeView>
     <Authorized>
-        <div class="card">
-            <h3>Create Forum</h3>
-            <div class="form-group field">
-                <label>Title:</label>
-                
-                <input type="text" @bind="ForumTitle" @bind:event="oninput"/>
-                <label>Description:</label>
-                                
-                <input class="h" type="text" @bind="Description" @bind:event="oninput"/>
-
-
+        <div class="container-fluid  my-5 mx-5">
+            <div class="card w-50 ">
+                <div class="card-header h3  ">
+                    Share your ideas..
+                </div>
+                <div class="title">
+                    <label class="row mx-2 h5 my-3">Title:</label>
+                    <input class="mx-2" type="text" @bind="ForumTitle" placeholder="write title here.."/>
+                </div>
+                <div class="body">
+                    <label class="row mx-2 h5 my-2">Share your thoughts:</label>
+                    <input class="body-input mx-2" @bind="Description"type="text" />
+                </div>
                 @if (!string.IsNullOrEmpty(msg))
                 {
                     <label style="color: @color">@msg</label>
                 }
-            </div>
-            <div class="button-row">
-                <button @onclick="Create" disabled="@(string.IsNullOrEmpty(ForumTitle))" class="acceptbtn">Create</button>
+                <div class="button-row mx-2 my-2">
+                    <button @onclick="Create"  class="acceptbtn bg-gradient">Create</button>
+                </div>
             </div>
         </div>
     </Authorized>
     <NotAuthorized>
-        <LoginLinks/>
-    </NotAuthorized> 
+        <div class="card mx-auto my-5">
+            <div class="card-body">
+                You need to login first!
+            </div>
+            <div class="card-footer button mx-5">
+                <button class=" justify-content-center border-0" @onclick="GoToLogin">Login</button>
+            </div>
+            
+        </div>
+    </NotAuthorized>
 </AuthorizeView>
 
 
@@ -57,5 +67,10 @@
             Console.WriteLine(e);
             msg = e.Message;
         }
+    }
+
+    private void GoToLogin()
+    {
+        navMgr.NavigateTo("/Login");
     }
 }

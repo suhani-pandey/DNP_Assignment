@@ -23,6 +23,7 @@ else if (!forums.Any())
 }
 else
 {
+    @* <button @onclick="GotoCreatePost">Create Forum</button> *@
     <div class="container-fluid">
 
         @foreach (Forum forum in forums)
@@ -99,5 +100,6 @@ else
         navMgr.NavigateTo($"/ViewAll/{id}");
     }
 
+    
 
 }
