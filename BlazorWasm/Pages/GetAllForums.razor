@@ -6,7 +6,7 @@
 
 
 
-@if (!string.IsNullOrEmpty(msg))@* display any msg in case it has ny value in case of error*@
+@if (!string.IsNullOrEmpty(msg)) @* display any msg in case it has ny value in case of error*@
 {
     <div>
         <span>@msg</span>
@@ -21,29 +21,50 @@ else if (!forums.Any())
 {
     <span>No forums to be found</span>
 }
-else 
+else
 {
-    <table class="table justify-content-center">
-        
-        <thead>
-        <tr>
-            <th class="text-center">No.</th>
-            <th class="text-center">Title</th>
-            <th class="text-center">Created On</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="container-fluid">
+
         @foreach (Forum forum in forums)
         {
-            <tr>
-                <td class="text-center">@forum.Id</td>
-                <td class="text-center" @onclick="() => OpenDetail(forum.Id)">@forum.Title</td>
-                <td class="text-center">@forum.CreatedOn</td>
-            </tr>
+            <div class="card my-5">
+                <div class="forum"> 
+                                <div class="card-title mx-2 my-1">@forum.CreatedOn</div>
+                    <div class="card-title mx-2 h2" @onclick="() => OpenDetail(forum.Id)">
+                        @forum.Title
+                    </div>
+                    <div class="card-footer">
+                        <img class="rating" src="images/star.png" alt=""/>
+                        <img class="rating" src="images/star.png" alt=""/>
+                        <img class="rating" src="images/star.png" alt=""/>
+                        </div>
+ 
+                    </div>
+            </div>
+            
         }
-
-        </tbody>
-    </table>
+    </div>
+    @* <table class="table justify-content-center"> *@
+    @*      *@
+    @*     <thead> *@
+    @*     <tr> *@
+    @*         <th class="text-center">No.</th> *@
+    @*         <th class="text-center">Title</th> *@
+    @*         <th class="text-center">Created On</th> *@
+    @*     </tr> *@
+    @*     </thead> *@
+    @*     <tbody> *@
+    @*     @foreach (Forum forum in forums) *@
+    @*     { *@
+    @*         <tr> *@
+    @*             <td class="text-center">@forum.Id</td> *@
+    @*             <td class="text-center" @onclick="() => OpenDetail(forum.Id)">@forum.Title</td> *@
+    @*             <td class="text-center">@forum.CreatedOn</td> *@
+    @*         </tr> *@
+    @*     } *@
+    @* *@
+    @*     </tbody> *@
+    @* </table> *@
 }
 
 
@@ -75,7 +96,6 @@ else
 
     private async void OpenDetail(int id)
     {
-        await ForumService.GetForumById(id);
         navMgr.NavigateTo($"/ViewAll/{id}");
     }
 

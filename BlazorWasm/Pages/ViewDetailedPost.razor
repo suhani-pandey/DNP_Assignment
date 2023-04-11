@@ -23,20 +23,30 @@
 @* } *@
 else
 {
-    <div class="container">
-        <div class="users-container">
-            <div class="col user-card w-100 h-50 ">
-                <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forums.Title</label>
-                <label class="row mx-4 my-3 ">@forums.Description</label>
-                <label class="row mx-4 my-3 ">@forums.CreatedOn</label>
-            </div>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header h2">@forums.Title</div>
+            <div class="card-body">
+                        @forums.Description
+                    </div>
         </div>
+        
     </div>
+    @* <div class="container"> *@
+    @*     <div class="users-container"> *@
+    @*         <div class="col user-card w-100 h-50 "> *@
+    @*             <label class="row border-bottom px-4 border-dark  rounded-0  mx-1 my-3 h2 ">@forums.Title</label> *@
+    @*             <label class="row mx-4 my-3 ">@forums.Description</label> *@
+    @*             <label class="row mx-4 my-3 ">@forums.CreatedOn</label> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
     
 
 @code {
     [Parameter]
     public int Id { get; set; }
+    
     private Forum forums;
     private string msg = "";
     private string title = "";
@@ -61,5 +71,4 @@ else
 
 }
 
-}
 }
