@@ -51,6 +51,10 @@
 
         try
         {
+            if (!password.Equals(rePassword))
+            {
+                throw new Exception("Password doesnot match");
+            }
             await UserService.CreateUser(new User(userName,password,rePassword));
             userName = "";
             password = "";

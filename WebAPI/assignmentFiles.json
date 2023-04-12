@@ -23,6 +23,12 @@
       "username": "Rajip",
       "password": "Rajip",
       "rePassword": "Rajip"
+    },
+    {
+      "id": 5,
+      "username": "troels",
+      "password": "troels",
+      "rePassword": "troels"
     }
   ],
   "Forums": [
@@ -88,6 +94,13 @@
       "Description": "Seek advice and help on graphics and animation in this section.",
       "CreatedOn": "Sunday , Apr 09 2023,10.48",
       "CreatedBy": "Rajip"
+    },
+    {
+      "Id": 10,
+      "Title": "This is new post created by troels",
+      "Description": "HI! I am troels..I created this post....",
+      "CreatedOn": "Wednesday , Apr 12 2023,08.41",
+      "CreatedBy": "troels"
     }
   ]
 }

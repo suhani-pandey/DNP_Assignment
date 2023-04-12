@@ -54,6 +54,10 @@
         errorLabel = "";
         try
         {
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                throw new Exception("fields must nit be empty");
+            }
             await UserService.LoginAsync(userName, password);
             navMgr.NavigateTo("/");
             msg = "Login successfully done";
