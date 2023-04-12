@@ -4,29 +4,32 @@
 @using Domain
 @using HttpClient.ClientInterface
 @inject NavigationManager navMgr
+@inject AuthenticationStateProvider context;
 
 <AuthorizeView>
     <Authorized>
         <div class="container-fluid  my-5 mx-5">
             <div class="card w-50 ">
-                <div class="card-header h3  ">
+                <div class="card-header h3" style="background-color: #2002">
                     Share your ideas..
                 </div>
-                <div class="title">
-                    <label class="row mx-2 h5 my-3">Title:</label>
-                    <input class="mx-2" type="text" @bind="ForumTitle" placeholder="write title here.."/>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label h5 my-2">Title</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" @bind="ForumTitle"></textarea>
                 </div>
-                <div class="body">
-                    <label class="row mx-2 h5 my-2">Share your thoughts:</label>
-                    <input class="body-input mx-2" @bind="Description"type="text" />
+                
+                <div class="mb-3">
+                  <label for="exampleFormControlTextarea1" class="form-label h5">Share Your thoughts</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" @bind="Description"></textarea>
                 </div>
+                
                 @if (!string.IsNullOrEmpty(msg))
                 {
                     <label style="color: @color">@msg</label>
                 }
-                <div class="button-row mx-2 my-2">
-                    <button @onclick="Create"  class="acceptbtn bg-gradient">Create</button>
-                </div>
+                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" @onclick="Create">
+                  Create
+                </button>
             </div>
         </div>
     </Authorized>
@@ -51,13 +54,25 @@
     private string ForumTitle = "";
     private string Description = "";
     private string color = "";
+    private string? createdBy = "";
+    
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState state = await context.GetAuthenticationStateAsync();
+        createdBy = state.User.Identity!.Name;
+    }
+    
 
     private async Task Create()
     {
         msg = "";
         try
         {
-            await ForumService.CreateForum(new Forum(ForumTitle,Description));
+            if (string.IsNullOrEmpty(ForumTitle) || string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(createdBy))
+            {
+                throw new Exception("Empty field Not Allowed!!");
+            }
+            await ForumService.CreateForum(new Forum(ForumTitle,Description,createdBy));
             ForumTitle = "";
             Description = "";
             msg = "Forum successfully created";
@@ -73,4 +88,5 @@
     {
         navMgr.NavigateTo("/Login");
     }
+    
 }

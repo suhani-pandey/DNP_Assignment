@@ -5,68 +5,109 @@
 @inject NavigationManager navMgr
 
 
-
-@if (!string.IsNullOrEmpty(msg)) @* display any msg in case it has ny value in case of error*@
-{
-    <div>
-        <span>@msg</span>
-    </div>
-}
-
-@if (forums == null)
-{
-    <span>Loading..</span>
-}
-else if (!forums.Any())
-{
-    <span>No forums to be found</span>
-}
-else
-{
-    @* <button @onclick="GotoCreatePost">Create Forum</button> *@
-    <div class="container-fluid">
-
-        @foreach (Forum forum in forums)
+<AuthorizeView>
+    <Authorized>
+        
+        @if (!string.IsNullOrEmpty(msg)) @* display any msg in case it has ny value in case of error*@
         {
-            <div class="card my-5">
-                <div class="forum"> 
-                                <div class="card-title mx-2 my-1">@forum.CreatedOn</div>
-                    <div class="card-title mx-2 h2" @onclick="() => OpenDetail(forum.Id)">
-                        @forum.Title
-                    </div>
-                    <div class="card-footer">
-                        <img class="rating" src="images/star.png" alt=""/>
-                        <img class="rating" src="images/star.png" alt=""/>
-                        <img class="rating" src="images/star.png" alt=""/>
-                        </div>
- 
-                    </div>
+            <div>
+                <span>@msg</span>
             </div>
-            
         }
-    </div>
-    @* <table class="table justify-content-center"> *@
-    @*      *@
-    @*     <thead> *@
-    @*     <tr> *@
-    @*         <th class="text-center">No.</th> *@
-    @*         <th class="text-center">Title</th> *@
-    @*         <th class="text-center">Created On</th> *@
-    @*     </tr> *@
-    @*     </thead> *@
-    @*     <tbody> *@
-    @*     @foreach (Forum forum in forums) *@
-    @*     { *@
-    @*         <tr> *@
-    @*             <td class="text-center">@forum.Id</td> *@
-    @*             <td class="text-center" @onclick="() => OpenDetail(forum.Id)">@forum.Title</td> *@
-    @*             <td class="text-center">@forum.CreatedOn</td> *@
-    @*         </tr> *@
-    @*     } *@
-    @* *@
-    @*     </tbody> *@
-    @* </table> *@
-}
+
+        @if (forums == null)
+        {
+            <span>Loading..</span>
+        }
+        else if (!forums.Any())
+        {
+            <span>No forums to be found</span>
+        }
+        else
+        {
+            @* <button @onclick="GotoCreatePost">Create Forum</button> *@
+            <div class="container-fluid">
+
+                <div class="container">
+                    <img class="image-create"src="images/create+cross+new+plus+icon-1320168707626274697.png" style="cursor: pointer"  @onclick="GotoCreateForum"/>
+                    <label class="h5 my-3" style="cursor: pointer" @onclick="GotoCreateForum">Create Post</label>
+                </div>
+                
+                @foreach (Forum forum in forums)
+                {
+                    <div class="card my-5">
+                        <div class="forum">
+                            <div class="card-title mx-2 my-1">
+                                <img class="image-clock mx-1" src="images/clock.png"/>@forum.CreatedOn |
+                                <img class="image-clock mx-1" src="images/author1.jpg"/>@forum.CreatedBy
+
+                            </div>
+                            <div class="card-title mx-2 h2"style="cursor: pointer" @onclick="() => OpenDetail(forum.Id)">
+                                @forum.Title
+                            </div>
+                            <div class="card-footer" style="background-color: #2002">
+                                <img class="rating" src="images/star.png" alt=""/>
+                                <img class="rating" src="images/star.png" alt=""/>
+                                <img class="rating" src="images/star.png" alt=""/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            </div>
+        }
+
+    </Authorized>
+    <NotAuthorized>
+        @if (!string.IsNullOrEmpty(msg)) @* display any msg in case it has ny value in case of error*@
+                {
+                    <div>
+                        <span>@msg</span>
+                    </div>
+                }
+        
+                @if (forums == null)
+                {
+                    <span>Loading..</span>
+                }
+                else if (!forums.Any())
+                {
+                    <span>No forums to be found</span>
+                }
+                else
+                {
+                    @* <button @onclick="GotoCreatePost">Create Forum</button> *@
+                    <div class="container-fluid">
+        
+                        @foreach (Forum forum in forums)
+                        {
+                            <div class="card my-5">
+                                <div class="forum">
+                                    <div class="card-title mx-2 my-1">
+                                        <img class="image-clock mx-1" src="images/clock.png"/>@forum.CreatedOn |
+                                        <img class="image-clock mx-1" src="images/author1.jpg"/>@forum.CreatedBy
+        
+                                    </div>
+                                    <div class="card-title mx-2 h2"style="cursor: pointer" @onclick="() => OpenDetail(forum.Id)">
+                                        @forum.Title
+                                    </div>
+                                    <div class="card-footer" style="background-color: #2002">
+                                        <img class="rating" src="images/star.png" alt=""/>
+                                        <img class="rating" src="images/star.png" alt=""/>
+                                        <img class="rating" src="images/star.png" alt=""/>
+                                    </div>
+        
+                                </div>
+                            </div>
+        
+                        }
+                    </div>
+                }
+
+    </NotAuthorized>
+    
+</AuthorizeView>
 
 
 @code {
@@ -100,6 +141,8 @@ else
         navMgr.NavigateTo($"/ViewAll/{id}");
     }
 
-    
-
+    private void GotoCreateForum()
+    {
+        navMgr.NavigateTo("/CreateForum");
+    }
 }

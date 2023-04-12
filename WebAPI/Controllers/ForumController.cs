@@ -34,11 +34,11 @@ public class ForumController:ControllerBase
     
     [HttpGet]//GET requests to this controller ends here
     //FromQuery to indicate that this argument should be extracted from the query parameters of the URI.
-    public async Task<ActionResult<IEnumerable<Forum>>> GetAsync([FromQuery] string? title,string? description)
+    public async Task<ActionResult<IEnumerable<Forum>>> GetAsync([FromQuery] string? title,string? description,string? createdBy)
     {
         try
         {
-            Forum forum = new(title,description);
+            Forum forum = new(title,description,createdBy);
             IEnumerable<Forum> forums = await forumLogic.GetAllForumAsync(forum);
             return Ok(forums);
         }

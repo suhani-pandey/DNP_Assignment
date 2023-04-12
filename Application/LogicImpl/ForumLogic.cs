@@ -18,7 +18,7 @@ public class ForumLogic : IForumLogic
     public async Task<Forum> CreateForumAsync(Forum forumdto)
     {
         ValidateData(forumdto);
-        Forum forum = new Forum(forumdto.Title, forumdto.Description);
+        Forum forum = new Forum(forumdto.Title, forumdto.Description,forumdto.CreatedBy);
         Forum created = await forumDao.CreateForumAsync(forum);
         return created;
     }
