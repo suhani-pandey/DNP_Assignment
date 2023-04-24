@@ -9,4 +9,5 @@ public interface IForumLogic
     Task<IEnumerable<Forum>> GetAllForumAsync(Forum forum);
     Task<Forum> GetByIdAsync(int forumId);
     // Task<Forum> GetDescriptionByID(int forumId);
+    // Task PostComments(Comments comments);
 }

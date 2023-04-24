@@ -54,11 +54,12 @@
     private string ForumTitle = "";
     private string Description = "";
     private string color = "";
-    private string? createdBy = "";
+    private string? createdBy;
     
     protected override async Task OnInitializedAsync()
     {
         AuthenticationState state = await context.GetAuthenticationStateAsync();
+        // createdBy = state.User.Identity!.Name;
         createdBy = state.User.Identity!.Name;
     }
     
@@ -68,7 +69,7 @@
         msg = "";
         try
         {
-            if (string.IsNullOrEmpty(ForumTitle) || string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(createdBy))
+            if (string.IsNullOrEmpty(ForumTitle) || string.IsNullOrEmpty(Description))
             {
                 throw new Exception("Empty field Not Allowed!!");
             }

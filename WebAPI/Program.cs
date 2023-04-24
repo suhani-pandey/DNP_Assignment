@@ -2,6 +2,8 @@ using System.Text;
 using Application.DAOInterfaces;
 using Application.LogicImpl;
 using Application.LogicInterfaces;
+using EFcDataAccess;
+using EFcDataAccess.DAOs;
 using FileData;
 using FileData.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -17,10 +19,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<FileContext>();
-builder.Services.AddScoped<IUserDAO, UserFileDao>();
+builder.Services.AddScoped<IUserDAO, UserEfcDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
-builder.Services.AddScoped<IForumDao,ForumFileDao>();
+builder.Services.AddScoped<IForumDao,ForumEfcDao>();
 builder.Services.AddScoped<IForumLogic,ForumLogic>();
+builder.Services.AddScoped<ForumContext>();
 
 // builder.Services.AddScoped<IAuthService, AuthService>();
 

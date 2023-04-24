@@ -22,6 +22,13 @@ public class ForumLogic : IForumLogic
         Forum created = await forumDao.CreateForumAsync(forum);
         return created;
     }
+    
+    // public async Task PostComments(Comments comments)
+    // {
+    //     Comments createComment = new Comments(comments.CreatedBy,comments.Message);
+    //     Comments created = await forumDao.CreateComments(comments);
+    //
+    // }
 
     public async Task<IEnumerable<Forum>> GetAllForumAsync(Forum forum)
     {
@@ -41,6 +48,7 @@ public class ForumLogic : IForumLogic
     }
 
     
+
 
     private void ValidateData(Forum forumdto)
     {

@@ -1,4 +1,7 @@
-﻿namespace Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace Domain;
 
 public class User
 {
@@ -6,6 +9,9 @@ public class User
     public string  username { get; set; }
     public string  password { get; set; }
     public string  rePassword { get; set; }
+    
+    [JsonIgnore]
+    public ICollection<Forum>? Forums { get; set; }
 
     public User()
     {

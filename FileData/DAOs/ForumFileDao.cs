@@ -23,12 +23,23 @@ public class ForumFileDao: IForumDao
             id++;
         }
         forumdto.Id = id;
-        forumdto.CreatedOn = DateTime.Now.ToString("dddd , MMM dd yyyy,hh:mm");
+        forumdto.CreatedOn = DateTime.Now.ToString("f");
+        // forumdto.CreatedOn = DateOnly.FromDateTime(DateTime.Now);
         context.Forums.Add(forumdto);
         context.SaveChanges();
 
         return Task.FromResult(forumdto);
     }
+    
+    // public Task<Comments> CreateComments(Comments comments)
+    // {
+    //     int id = 1;
+    //     if (context.Forums.Any())
+    //     {
+    //         id = context.Forums.Max(f => f.Id);
+    //         id++;
+    //     }
+    // }
 
     public Task<Forum?> GetForumById(int ForumId)
     {
@@ -47,4 +58,6 @@ public class ForumFileDao: IForumDao
 
         return Task.FromResult(forums);
     }
+
+   
 }
