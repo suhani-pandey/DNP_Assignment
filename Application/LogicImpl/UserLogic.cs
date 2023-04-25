@@ -17,8 +17,8 @@ public class UserLogic:IUserLogic
 
     public async Task<User> CreateAsync(User userToCreate)
     {
-        User? existingUser = await UserDao.GetUserByUsernameandPassword(userToCreate.username,userToCreate.password,userToCreate.rePassword);
-        if (existingUser!= null)
+        User? existingUser = await UserDao.CreateAsync(userToCreate);
+        if (existingUser== null)
         {
             throw new Exception("Username already exists");
         }
@@ -54,6 +54,7 @@ public class UserLogic:IUserLogic
         {
             throw new Exception("Password doesnt match");
         }
+        
     }
     
     public async Task<User> ValidateUser(UserLoginDtos userDto)
@@ -70,7 +71,7 @@ public class UserLogic:IUserLogic
         {
             throw new Exception("Password mismatch");
         }
-
+        
         return existingUser;
     }
 

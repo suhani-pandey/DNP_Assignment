@@ -22,16 +22,24 @@ public class UserEfcDao: IUserDAO
         return userToCreate.Entity;
     }
 
-    public async Task<User> GetUserByUsernameandPassword(string userName, string password, string rePassword)
-    {
-        User? user = await context.Users.FirstOrDefaultAsync(u =>
-            u.username.Equals(userName) && u.password.Equals(password) && u.rePassword.Equals(rePassword));
-        return user;
-    }
+    // public async Task<User> GetUserByUsernameandPassword(string userName, string password)
+    // {
+    //     User? user = await context.Users.FirstOrDefaultAsync(u =>
+    //         u.username.Equals(userName) && u.password.Equals(password));
+    //     if (user is null )
+    //     {
+    //         throw new Exception("Cannot find the user");
+    //     }
+    //     return user;
+    // }
 
     public async Task<User?> GetUserById(int OwnerId)
     {
         User? user = await context.Users.FindAsync(OwnerId);
+        if (user!=null)
+        {
+            throw new Exception($"user with id {OwnerId} is not found");
+        }
         return user;
     }
 

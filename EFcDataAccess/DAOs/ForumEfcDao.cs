@@ -25,6 +25,10 @@ public class ForumEfcDao : IForumDao
     public async Task<Forum?> GetForumById(int forumId)
     {
         Forum? getForumById = await context.Forums.FindAsync(forumId);
+        if (getForumById==null)
+        {
+            throw new Exception($"Forum with id{forumId} is null");
+        }
         return getForumById;
     }
 
@@ -33,9 +37,9 @@ public class ForumEfcDao : IForumDao
         IQueryable<Forum> getAllForum =context.Forums.AsQueryable();
         if (forum.Title!=null)
         {
-            getAllForum = getAllForum.Where(f => f.Title.ToLower().Equals(forum.Title));
+            getAllForum = getAllForum.Where(f => f.Title != null && 
+                                                 f.Title.ToLower().Equals(forum.Title));
         }
-
         IEnumerable<Forum> result = await getAllForum.ToListAsync();
         return result;
     }

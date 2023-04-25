@@ -31,10 +31,10 @@ public class UserFileDao:IUserDAO
         return Task.FromResult(user);
     }
 
-    public Task<User> GetUserByUsernameandPassword(string userName, string password,string rePassword)
+    public Task<User> GetUserByUsernameandPassword(string userName, string password)
     {
         User? existing = fileContext.Users.FirstOrDefault(u =>
-            u.username.Equals(userName, StringComparison.OrdinalIgnoreCase)& u.password.Equals(password) & u.rePassword.Equals(rePassword)
+            u.username.Equals(userName, StringComparison.OrdinalIgnoreCase)& u.password.Equals(password)
         );
         return Task.FromResult(existing);
     }
